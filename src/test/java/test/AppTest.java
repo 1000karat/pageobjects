@@ -6,7 +6,20 @@ import page.TransactionPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AppTest extends BaseTest{
+    @Test
+    public void transactionFromCardNumberThird() {
+        int toCard = 1;
+        int fromCard = 2;
+        int addsum = 11000;
 
+        DashboardPage dashboardPage = new DashboardPage();
+        dashboardPage.transactionPage(toCard);
+
+        TransactionPage transactionPage = new TransactionPage();
+        transactionPage.moneyTransaction(fromCard, addsum);
+
+        assertEquals(transactionPage.getNotificationError().getText(), "Ошибка! Произошла ошибка");
+    }
     @Test
     public void transactionToFirstCardZero() {
         int toCard = 0;
@@ -77,20 +90,5 @@ public class AppTest extends BaseTest{
 
         assertEquals(firstBalanceCard - addsum, dashboardPage.getFirstCardBalance());
         assertEquals(secondBalanceCard + addsum, dashboardPage.getSecondCardBalance());
-    }
-
-    @Test
-    public void transactionFromCardNumberThird() {
-        int toCard = 1;
-        int fromCard = 2;
-        int addsum = 11000;
-
-        DashboardPage dashboardPage = new DashboardPage();
-        dashboardPage.transactionPage(toCard);
-
-        TransactionPage transactionPage = new TransactionPage();
-        transactionPage.moneyTransaction(fromCard, addsum);
-
-        assertEquals(transactionPage.getNotificationError().getText(), "Ошибка! Произошла ошибка");
     }
 }

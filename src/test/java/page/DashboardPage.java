@@ -18,17 +18,17 @@ public class DashboardPage {
         buttonReload.shouldBe(visible);
     }
     private int extractBalance(String text) {
-        int start = text.indexOf(balanceStart);
-        int finish = text.indexOf(balanceFinish);
-        String value = text.substring(start + balanceStart.length(), finish);
+        val start = text.indexOf(balanceStart);
+        val finish = text.indexOf(balanceFinish);
+        val value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
     }
     public int getFirstCardBalance() {
-        String text = cards.first().text();
+        val text = cards.first().text();
         return extractBalance(text);
     }
     public int getSecondCardBalance() {
-        String text = cards.last().text();
+        val text = cards.last().text();
         return extractBalance(text);
     }
     public void transactionPage(int toCard) {

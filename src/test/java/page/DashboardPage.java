@@ -17,30 +17,21 @@ public class DashboardPage {
     public DashboardPage() {
         buttonReload.shouldBe(visible);
     }
-
     private int extractBalance(String text) {
-        val start = text.indexOf(balanceStart);
-        val finish = text.indexOf(balanceFinish);
-        val value = text.substring(start + balanceStart.length(), finish);
+        int start = text.indexOf(balanceStart);
+        int finish = text.indexOf(balanceFinish);
+        String value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
     }
-
     public int getFirstCardBalance() {
-        val text = cards.first().text();
+        String text = cards.first().text();
         return extractBalance(text);
     }
-
     public int getSecondCardBalance() {
-        val text = cards.last().text();
+        String text = cards.last().text();
         return extractBalance(text);
     }
-
-    public TransactionPage transactionPage(int toCard) {
-        if (toCard == 1) {
-            buttonTransaction.first().click();
-            return new TransactionPage();
-        }
-        buttonTransaction.last().click();
-        return new TransactionPage();
+    public void transactionPage(int toCard) {
+        buttonTransaction.get(toCard).click();
     }
 }

@@ -16,6 +16,4 @@ public class VerificationPage {
         codeField.setValue(dataHelper.getCode());
         buttonVerify.click();
     }
-
-
 }

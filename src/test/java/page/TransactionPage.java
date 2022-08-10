@@ -11,30 +11,17 @@ public class TransactionPage {
     private final SelenideElement sender = $("[data-test-id='from'] input");
     private final SelenideElement buttonTransfer = $("[data-test-id='action-transfer']");
     private final SelenideElement buttonCancel = $("[data-test-id='action-cancel']");
+    private final SelenideElement notificationError = $x("//div[@class='notification__content']");
     DataHelper dataHelper = new DataHelper();
-
     public TransactionPage() {
         buttonCancel.shouldBe(visible);
     }
-
     public void moneyTransaction(int fromCard, int addsum) {
-        if (fromCard == 1) {
-            sum.setValue(String.valueOf(addsum));
-            sender.setValue(dataHelper.getCardNumberFirst());
-            buttonTransfer.click();
-            return;
-        }
-        if (fromCard == 2) {
-            sum.setValue(String.valueOf(addsum));
-            sender.setValue(dataHelper.getCardNumberSecond());
-            buttonTransfer.click();
-            return;
-        }
-        if (fromCard == 3) {
-            sum.setValue(String.valueOf(addsum));
-            sender.setValue(dataHelper.getCardNumberThird());
-            buttonTransfer.click();
-            return;
-        }
+        sum.setValue(String.valueOf(addsum));
+        sender.setValue(dataHelper.getCardNumberList(fromCard));
+        buttonTransfer.click();
+    }
+    public SelenideElement getNotificationError() {
+        return notificationError;
     }
 }

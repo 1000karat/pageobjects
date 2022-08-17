@@ -1,11 +1,28 @@
 package test;
 
+import com.codeborne.selenide.Configuration;
+import data.DataHelper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.DashboardPage;
+import page.LoginPage;
 import page.TransactionPage;
+import page.VerificationPage;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.appear;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-public class AppTest extends BaseTest{
+public class AppTest {
+
+    @BeforeEach
+    public void setUp() {
+        Configuration.browserSize = "1000x800";
+        Configuration.headless = true;
+        LoginPage loginPage = new LoginPage(DataHelper.BASE_URL);
+        VerificationPage verificationPage = new VerificationPage();
+    }
+
     @Test
     public void transactionToFirstCardZero() {
         int toCard = 0;
@@ -77,12 +94,12 @@ public class AppTest extends BaseTest{
         assertEquals(firstBalanceCard - addsum, dashboardPage.getFirstCardBalance());
         assertEquals(secondBalanceCard + addsum, dashboardPage.getSecondCardBalance());
     }
-    
-/*    @Test
+
+    @Test
     public void transactionFromCardNumberThird() {
         int toCard = 1;
         int fromCard = 2;
-        int addsum = 11000;
+        int addsum = 50000;
 
         DashboardPage dashboardPage = new DashboardPage();
         dashboardPage.transactionPage(toCard);
@@ -90,6 +107,8 @@ public class AppTest extends BaseTest{
         TransactionPage transactionPage = new TransactionPage();
         transactionPage.moneyTransaction(fromCard, addsum);
 
-        assertEquals(transactionPage.getNotificationError().getText(), "Ошибка! Произошла ошибка");
-    }*/
+        String expected = transactionPage.getNotificationError().shouldBe(appear, Duration.ofSeconds(3)).getText();
+
+        assertEquals(expected, "Ошибка! Произошла ошибка");
+    }
 }

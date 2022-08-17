@@ -12,8 +12,7 @@ public class VerificationPage {
 
     public VerificationPage() {
         codeField.shouldBe(visible);
-        DataHelper dataHelper = new DataHelper();
-        codeField.setValue(dataHelper.getCode());
+        codeField.setValue(DataHelper.CODE);
         buttonVerify.click();
     }
 }

@@ -13,9 +13,8 @@ public class LoginPage {
 
     public LoginPage(String url) {
         Selenide.open(url);
-        DataHelper dataHelper = new DataHelper();
-        loginFiled.setValue(dataHelper.getLogin());
-        passwordFiled.setValue(dataHelper.getPassword());
+        loginFiled.setValue(DataHelper.LOGIN);
+        passwordFiled.setValue(DataHelper.PASSWORD);
         buttonLogin.click();
     }
 }

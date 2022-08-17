@@ -11,14 +11,14 @@ public class TransactionPage {
     private final SelenideElement sender = $("[data-test-id='from'] input");
     private final SelenideElement buttonTransfer = $("[data-test-id='action-transfer']");
     private final SelenideElement buttonCancel = $("[data-test-id='action-cancel']");
-    private final SelenideElement notificationError = $x("//div[@class='notification__content']");
-    DataHelper dataHelper = new DataHelper();
+    private final SelenideElement notificationError = $("[data-test-id='error-notification'] .notification__content");
+
     public TransactionPage() {
         buttonCancel.shouldBe(visible);
     }
     public void moneyTransaction(int fromCard, int addsum) {
         sum.setValue(String.valueOf(addsum));
-        sender.setValue(dataHelper.getCardNumberList(fromCard));
+        sender.setValue(DataHelper.cardNumberList(fromCard));
         buttonTransfer.click();
     }
     public SelenideElement getNotificationError() {

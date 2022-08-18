@@ -3,6 +3,7 @@ Thumbs.db*
 HELP.md
 .gradle
 build/
+/artifacts/run.sh
 
 ### STS ###
 .apt_generated

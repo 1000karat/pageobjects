@@ -1,5 +1,6 @@
 package page;
 
+import lombok.extern.slf4j.Slf4j;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.val;

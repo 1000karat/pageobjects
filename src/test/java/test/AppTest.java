@@ -9,10 +9,8 @@ import page.LoginPage;
 import page.TransactionPage;
 import page.VerificationPage;
 
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.appear;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class AppTest {
 
     @BeforeEach
@@ -106,9 +104,6 @@ public class AppTest {
 
         TransactionPage transactionPage = new TransactionPage();
         transactionPage.moneyTransaction(fromCard, addsum);
-
-        String expected = transactionPage.getNotificationError().shouldBe(appear, Duration.ofSeconds(3)).getText();
-
-        assertEquals(expected, "Ошибка! Произошла ошибка");
+        transactionPage.notificationError();
     }
 }
